@@ -1,0 +1,5 @@
+{
+  "name": "EventMaster Pro",
+  "description": "A professional event management dashboard that integrates with user and event microservices for full CRUD operations and secure access.",
+  "requestFramePermissions": []
+}

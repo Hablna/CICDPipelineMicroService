@@ -21,7 +21,7 @@ public class eventService {
     }
 
     //modification d'un event
-    public event modifyEvent (event event) {
+    public event modifyEvent(event event) {
         event existingEvent = eventRepository.findById(event.getId()).get();
         if (existingEvent != null) {
             existingEvent.setTitle(event.getTitle());

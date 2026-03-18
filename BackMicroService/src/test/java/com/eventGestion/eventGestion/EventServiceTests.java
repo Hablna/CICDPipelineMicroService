@@ -3,11 +3,13 @@ package com.eventGestion.eventGestion;
 import com.eventGestion.eventGestion.Repository.eventRepository;
 import com.eventGestion.eventGestion.model.event;
 import com.eventGestion.eventGestion.service.eventService;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.junit.jupiter.api.Assertions.assertFalse;
@@ -20,6 +22,11 @@ class EventServiceTests {
 
 	@Autowired
 	private eventService service;
+
+	@BeforeEach
+	void cleanDatabase() {
+		repository.deleteAll();
+	}
 
 	@Test
 	void testModifyEvent() {
@@ -57,8 +64,9 @@ class EventServiceTests {
 		// Assert
 		assertNotNull(events);
 		assertEquals(2, events.size());
-		assertEquals("Event 1", events.get(0).getTitle());
-		assertEquals("Event 2", events.get(1).getTitle());
+		List<String> titles = events.stream().map(event::getTitle).collect(Collectors.toList());
+		assertTrue(titles.contains("Event 1"));
+		assertTrue(titles.contains("Event 2"));
 	}
 
 	@Test
